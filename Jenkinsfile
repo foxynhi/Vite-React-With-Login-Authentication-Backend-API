@@ -1,15 +1,17 @@
 pipeline {
     agent any
 
-
+    stages {
         stage('Start App') {
             steps {
                 echo 'Starting app...'
-                sh '''
-                    ls -la
-                    npm ci
-                    vite
-                '''
+                dir('frontend') {
+                    bat '''
+                        dir
+                        call npm ci
+                        call npx vite
+                    '''
+                }
             }
         }
     }
